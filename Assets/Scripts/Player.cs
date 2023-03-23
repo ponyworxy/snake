@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     private bool _isLive = true;
 
     private void Awake()
-    {
+    {   
         for (int i = 0; i < Lives; i++) AddLive();
     }
 

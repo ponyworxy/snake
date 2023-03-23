@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameMusic : MonoBehaviour
 {
-    public AudioClip WinPlay;
+    public AudioClip WinPlay, DiePlay;
     private AudioSource _audio;
 
     private void Awake()
@@ -14,6 +14,13 @@ public class GameMusic : MonoBehaviour
 
     public void PlayWin()
     {
+        _audio.Stop();
         _audio.PlayOneShot(WinPlay);
+    }
+
+    public void PlayDie() 
+    {
+        _audio.Stop();
+        _audio.PlayOneShot(DiePlay);
     }
 }

@@ -78,6 +78,7 @@ public class Level : MonoBehaviour
         gameui.uiGame.SetActive(false);
         gameui.uiDie.SetActive(true); // Почему-то не работает
         gameui.uiDie.active = true;
+        music.PlayDie();
     }
 
     public void OnFinish() 
@@ -87,6 +88,7 @@ public class Level : MonoBehaviour
         gameui.uiGame.SetActive(false);
         gameui.uiWin.SetActive(true); // Почему-то не работает
         gameui.uiWin.active = true;
+        music.PlayWin();
     }
 
     public void NextLevel() 

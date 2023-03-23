@@ -7,34 +7,41 @@ public class Head : MonoBehaviour
     public Player player;
     public Level level;
 
+    public AudioClip sfxBump, sfxEat;
+    private AudioSource _sound;
+
+    public GameObject vfxBump, vfxEat;
+
+    private void Awake()
+    {
+        _sound = GetComponent<AudioSource>();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Head on " + collision.gameObject.name);
-
         if (collision.gameObject.TryGetComponent(out Cube cube)) {
             GetDamage(cube.Lives);
+            _sound.PlayOneShot(sfxBump);
+            vfxBump.gameObject.SetActive(true);
+            vfxBump.GetComponent<ParticleSystem>().Play();
         }
 
         if (collision.gameObject.TryGetComponent(out Food food)) {
             GetHealth(food.Lives);
             food.Eated();
+            _sound.PlayOneShot(sfxEat);
+            vfxEat.gameObject.SetActive(true);
+            vfxEat.GetComponent<ParticleSystem>().Play();
         }
 
     }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        Debug.Log("Head offfffff " + collision.gameObject.name);
-    }
-
 
     private void GetDamage(int Damage) {
 
         for (int i = 0; i < Damage; i++)
         {
             player.RemoveLive();
-        }
-
+        } 
     }
 
     private void GetHealth(int Health) {
@@ -42,7 +49,6 @@ public class Head : MonoBehaviour
         for (int i = 0; i < Health; i++) { 
             player.AddLive();
         }
-
     }
 
 }
