@@ -6,5 +6,6 @@ using UnityEngine.UI;
 public class GameUI : MonoBehaviour
 {
     public GameObject uiGame, uiWin, uiDie;
+    public Text WinLevels;
 
 }

@@ -57,9 +57,7 @@ public class Player : MonoBehaviour
 
     private void Die() {
         _isLive = false;
-        level.OnDie();
-        Debug.Log("Player Died!");
-        
+        level.OnDie();     
     }
 
     public int SnakeLives() {
