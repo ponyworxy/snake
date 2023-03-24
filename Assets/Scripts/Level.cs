@@ -12,6 +12,7 @@ public class Level : MonoBehaviour
     public Player player;
     public GameMusic music;
     public GameUI gameui;
+    public int MaxLevels = 3;
     public enum State { Play, Win, Die }
     public State GameState { get; private set; }
 
@@ -35,9 +36,6 @@ public class Level : MonoBehaviour
   
         _HeadRadius = player.Head.GetComponent<SphereCollider>().radius * player.Head.transform.localScale.y;
         _Point = new Vector3(0, _HeadRadius, 0);
-
-        Debug.Log(Road.GetComponent<MeshCollider>().bounds.min);
-        Debug.Log(Road.GetComponent<MeshCollider>().bounds.max);
 
         _xmin = Road.GetComponent<MeshCollider>().bounds.min.x + _HeadRadius;
         _xmax = Road.GetComponent<MeshCollider>().bounds.max.x - _HeadRadius;
@@ -86,6 +84,7 @@ public class Level : MonoBehaviour
         GameState = State.Win;
         speed = 0;
         gameui.uiGame.SetActive(false);
+        gameui.WinLevels.text = LevelCounter.ToString() + "/" + MaxLevels.ToString();
         gameui.uiWin.SetActive(true); // Почему-то не работает
         gameui.uiWin.active = true;
         music.PlayWin();
@@ -94,7 +93,7 @@ public class Level : MonoBehaviour
     public void NextLevel() 
     {
         LevelCounter++;
-        if (LevelCounter > 3) LevelCounter = 1;
+        if (LevelCounter > MaxLevels) LevelCounter = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

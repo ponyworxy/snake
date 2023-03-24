@@ -10,7 +10,6 @@ public class Finish : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Head head)) {
 
-            Debug.Log("Finished!");
             level.OnFinish();
         }
     }
